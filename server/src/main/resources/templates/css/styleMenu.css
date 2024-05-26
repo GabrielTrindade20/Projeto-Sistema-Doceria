@@ -1,0 +1,161 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;700&family=Poppins:wght@200;300;400&display=swap');
+
+:root {
+  --primary: #EEB253;
+  --primary-hover: #ff8b61;
+  --text: #BE783C;
+  --erro: #c62a2594;
+  --white: white;
+  --black: black;
+}
+
+.header {
+  background-color: var(--black);
+  padding: 5px 10px; 
+}
+
+.usuario{
+  text-align: right;
+  margin-top: 3px;
+  align-items: center;
+}
+
+.usuario-name{
+  position: relative;
+  top: -8px;
+}
+
+.usuario a {
+  text-align: right; /* Alinhar verticalmente os elementos filhos */
+  padding: 10px; /* Adicionar algum espaço interno para o link */
+  border-radius: 5px; /* Adicionar borda arredondada */
+  color: #fff; /* Definir a cor do texto no link */
+  font-size: 1.1rem;
+  font-family: 'Noto Sans', sans-serif;
+}
+
+.usuario a .material-symbols-outlined {
+  font-size: 30px;
+  margin-right: 5px; /* Adicionar espaço entre o ícone e o nome de usuário */
+}
+
+.menu-lateral {
+  position: fixed;
+  top: 0;
+  left: 0;
+  font-family: inherit;
+  color: inherit;
+  display: flex;
+  flex-direction: column;
+  width: 250px;
+  height: 100%;
+  gap: 30px;
+  padding: 20px 10px 30px 10px;
+  background: var(--primary);
+  
+}
+
+.logo {
+  width: 90%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.logo img{
+  width: 180px;
+  margin-top: 30px;
+}
+
+.menu-lateral a {
+  color: var(--black);
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  height: 45px;
+  background: transparent;
+  border: 0;
+  padding: 0;
+  font-family: inherit;
+  color: inherit;
+  text-align: left;
+}
+
+.menu-lateral a > span {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  height: 40px;
+  padding: 0 16px 0 12px;
+}
+
+.menu-lateral a span > span {
+  position: relative;
+  font-size: 28px;
+  transition: 0.2s;
+}
+
+.links-menu {
+  margin-top: 30px;
+  margin-left: 10px;
+  text-align: left;
+}
+
+.icone-menu:hover {
+  background: rgba(255, 255, 255, 0.3);
+  font-weight: bolder;
+  color: var(--white);
+}
+
+.menu-lateral>nav {
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.menu-lateral > nav a:last-child {
+  margin-top: auto;
+}
+
+.perfil {
+  border-top: 1px solid var(--black); 
+  width: 90%;
+  text-align: center;
+  position: absolute;
+  bottom: 0;
+}
+
+/* Estilos padrão para telas maiores que 600px */
+@media only screen and (min-width: 600px) {
+  .menu-lateral {
+    width: 250px;
+  }
+
+  .menu-lateral a > span {
+    padding: 0 16px 0 12px;
+  }
+
+  .menu-lateral a span > span {
+    display: inline; /* Garante que os nomes sejam visíveis em telas maiores */
+  }
+}
+
+/* Estilos para telas menores que 600px */
+@media only screen and (max-width: 600px) {
+  .menu-lateral {
+    width: 15%;
+  }
+
+  .menu-lateral a > span {
+    padding: 0 5px;
+  }
+
+  .logo img {
+    width: 70px;
+  }
+
+  .name span{
+    display: none; /* Oculta os nomes em telas menores */
+  }
+}
