@@ -1,9 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;700&family=Poppins:wght@200;300;400&display=swap');
 
 :root {
-    --primary: #F1AABA ;
-    --primary-hover: #C68391; 
-    --text: #D99066;               
+    --primary: #EEB253 ;
+    --primary-hover: #ff8b61; 
+    --text: #BE783C;               
     --erro: #c62a2594;
     --white: white;
     --black: black;
@@ -25,7 +25,6 @@ body{
     height: 100vh;
     display: flex;
 }
-
 
 #section-esquerda, #section-direita{
     width: 50vw;

@@ -1,3 +1,6 @@
+import React from 'react';
+
+
 <link rel="stylesheet" href="../css/styleMenu.css">
 
 <header class="header">
