@@ -1,5 +1,3 @@
-import React from 'react';
-
 
 <link rel="stylesheet" href="../css/styleMenu.css">
 
