@@ -3,77 +3,135 @@ import formStyles from '../../../css/cadastro.module.css';
 import Styles from '../../../css/page.module.css';
 
 const IngredientForm = () => {
-    const [name, setName] = useState('');
-    const [description, setDescription] = useState('');
-    const [quantity, setQuantity] = useState('');
-    const [unit, setUnit] = useState('');
+    const [nome, setNome] = useState('');
+    const [descricao, setDescricao] = useState('');
+    const [quantidade, setQuantidade] = useState('');
+    const [unidade, setUnidade] = useState('');
+    const [preco, setPreco] = useState('');
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        // Lógica para enviar dados ao banco de dados
-        console.log({ name, description, quantity, unit });
+
+        const data = {
+            nome,
+            descricao,
+            quantidade,
+            unidade,
+            preco
+        };
+
+        try {
+            const response = await fetch('http://localhost:8080/api/ingredientes/cadastrarIngrediente', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            });
+
+            if (!response.ok) {
+                throw new Error('Erro ao cadastrar ingrediente');
+            }
+
+            // Limpar o formulário após o sucesso
+            handleReset();
+            
+            console.log('Ingrediente cadastrado com sucesso!');
+        } catch (error) {
+            console.error('Erro ao cadastrar ingrediente:', error.message);
+        }
     };
 
     const handleReset = () => {
-        setName('');
-        setDescription('');
-        setQuantity('');
-        setUnit('');
+        setNome('');
+        setDescricao('');
+        setQuantidade('');
+        setUnidade('');
+        setPreco('');
     };
 
     return (
         <div className={Styles.page}>
-
             <div className={Styles.pageTitulo}>
                 <h1>Cadastrar Ingrediente</h1>
             </div>
-
-            <form className={formStyles.form} onSubmit={handleSubmit}>
-                <label className={formStyles.label} htmlFor="name">Nome do Ingrediente</label>
-                <input
-                    id="name"
-                    type="text"
-                    className={formStyles.input}
-                    value={name}
-                    onChange={(e) => setName(e.target.value)}
-                    required
-                />
-                <label className={formStyles.label} htmlFor="description">Descrição</label>
-                <textarea
-                    id="description"
-                    className={formStyles.textArea}
-                    value={description}
-                    onChange={(e) => setDescription(e.target.value)}
-                    required
-                />
-                <label className={formStyles.label} htmlFor="quantity">Quantidade em Estoque</label>
-                <input
-                    id="quantity"
-                    type="number"
-                    className={formStyles.input}
-                    value={quantity}
-                    onChange={(e) => setQuantity(e.target.value)}
-                    required
-                />
-                <label className={formStyles.label} htmlFor="unit">Unidade de Medida</label>
-                <select
-                    id="unit"
-                    className={formStyles.select}
-                    value={unit}
-                    onChange={(e) => setUnit(e.target.value)}
-                    required
-                >
-                    <option value="">Selecione</option>
-                    <option value="kg">Kg</option>
-                    <option value="g">g</option>
-                    <option value="l">L</option>
-                    <option value="ml">ml</option>
-                </select>
-                <div>
-                    <button type="submit" className={`${formStyles.button} ${formStyles.buttonSubmit}`}>Cadastrar</button>
-                    <button type="button" className={`${formStyles.button} ${formStyles.buttonReset}`} onClick={handleReset}>Reset</button>
-                </div>
-            </form>
+            <div className={formStyles.containerForm}>
+                <form className={formStyles.form} onSubmit={handleSubmit}>
+                    <div className={formStyles.containerForm}>
+                        <div className={formStyles.column}>
+                            <div className={formStyles.itensForm}>
+                                <label className={formStyles.label} htmlFor="nome">Nome do Ingrediente</label>
+                                <input
+                                    id="nome"
+                                    type="text"
+                                    className={formStyles.input}
+                                    value={nome}
+                                    onChange={(e) => setNome(e.target.value)}
+                                    required
+                                />
+                            </div>
+                            <div className={formStyles.itensForm}>
+                                <label className={formStyles.label} htmlFor="quantidade">Quantidade em Estoque</label>
+                                <input
+                                    id="quantidade"
+                                    type="number"
+                                    className={formStyles.input}
+                                    value={quantidade}
+                                    onChange={(e) => setQuantidade(e.target.value)}
+                                    required
+                                />
+                            </div>
+                        </div>
+                        <div className={formStyles.column}>
+                            <div className={formStyles.itensForm}>
+                                <label className={formStyles.label} htmlFor="preco">Preço de Custo</label>
+                                <input
+                                    id="preco"
+                                    type="number"
+                                    step="0.01"
+                                    className={formStyles.input}
+                                    value={preco}
+                                    onChange={(e) => setPreco(e.target.value)}
+                                    required
+                                />
+                            </div>
+                            <div className={formStyles.itensForm}>
+                                <label className={formStyles.label} htmlFor="unidade">Unidade de Medida</label>
+                                <select
+                                    id="unidade"
+                                    className={formStyles.select}
+                                    value={unidade}
+                                    onChange={(e) => setUnidade(e.target.value)}
+                                    required
+                                >
+                                    <option value="">Selecione</option>
+                                    <option value="kg">Kg</option>
+                                    <option value="g">g</option>
+                                    <option value="l">L</option>
+                                    <option value="ml">ml</option>
+                                    <option value="uni">Un</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div className={formStyles.containerForm}>
+                        <div className={formStyles.column}>
+                            <label className={formStyles.label} htmlFor="descricao">Descrição</label>
+                            <textarea
+                                id="descricao"
+                                className={formStyles.textArea}
+                                value={descricao}
+                                onChange={(e) => setDescricao(e.target.value)}
+                                required
+                            />
+                        </div>
+                    </div>
+                    <div>
+                        <button type="submit" className={`${formStyles.button} ${formStyles.buttonSubmit}`}>Cadastrar</button>
+                        <button type="button" className={`${formStyles.button} ${formStyles.buttonReset}`} onClick={handleReset}>Reset</button>
+                    </div>
+                </form>
+            </div>
         </div>
     );
 };
