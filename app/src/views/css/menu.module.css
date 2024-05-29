@@ -4,7 +4,7 @@
 }
 
 .containerMenu {
-    position: absolute;
+    position: fixed;
     margin-top: -50px;
     width: 25%;
     height: 100%;
